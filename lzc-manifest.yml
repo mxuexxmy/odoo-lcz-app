@@ -1,0 +1,36 @@
+lzc-sdk-version: "0.1"
+name: Odoo
+package: cloud.lazycat.app.odoo
+version: 0.0.1
+description: 一站式全业务链管理平台
+homepage: ""
+author: odoo
+application:
+  subdomain: odoo
+  background_task: false
+  multi_instance: false
+  gpu_accel: false
+  kvm_accel: false
+  usb_accel: false
+  routes:
+    - /=http://odoo18.cloud.lazycat.app.odoo.lzcapp:8069/
+services:
+  postgres-db:
+    image: registry.lazycat.cloud/mxuexxmy/library/postgres:7bf15a21a948d5f3
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo18@2024
+      - POSTGRES_DB=postgres
+    binds:
+      - /lzcapp/var/postgresql:/var/lib/postgresql/data
+  odoo18:
+    image: registry.lazycat.cloud/mxuexxmy/library/odoo:a498cae86713a721
+    environment:
+      - HOST=postgres-db
+      - USER=odoo
+      - PASSWORD=odoo18@2024
+    depends_on:
+      - postgres-db
+    binds:
+      - /lzcapp/var/addons:/mnt/extra-addons
+      - /lzcapp/var/etc:/etc/odoo
