@@ -1,2 +1,2 @@
-# odoo-lcz
-懒猫云 odoo 应用
+# odoo-lcz-app
+Odoo 懒猫微服应用
