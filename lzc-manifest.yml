@@ -22,7 +22,7 @@ services:
       - POSTGRES_PASSWORD=odoo@2024
       - POSTGRES_DB=postgres
     binds:
-      - /lzcapp/var/data/postgresql:/var/lib/postgresql/data/pgdata
+      - /lzcapp/var/postgresql:/var/lib/postgresql/data/
   odoo:
     image: registry.lazycat.cloud/mxuexxmy/library/odoo:4322dc0dd371c438
     environment:
@@ -32,5 +32,6 @@ services:
     depends_on:
       - postgres-db
     binds:
-      - /lzcapp/var/data/addons:/mnt/extra-addons
-      - /lzcapp/var/data/etc:/etc/odoo
+      - /lzcapp/var/addons:/mnt/extra-addons
+      - /lzcapp/var/etc:/etc/odoo
+      - /lzcapp/var/web:/var/lib/odoo
