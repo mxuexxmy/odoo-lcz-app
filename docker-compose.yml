@@ -1,29 +1,33 @@
-version: '3.1'
-services:
-  postgres-db:
-    image: postgres:15
-    user: root
-    environment:
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=odoo18@2024
-      - POSTGRES_DB=postgres
-    restart: always
-    volumes:
-        - ./postgresql:/var/lib/postgresql/data
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
 
-  odoo:
-    image: odoo:17
-    user: root
-    depends_on:
-      - postgres-db
-    ports:
-      - "8069:8069"
-    environment:
-      - HOST=db
-      - USER=odoo
-      - PASSWORD=odoo18@2024
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:latest
     volumes:
-      - ./addons:/mnt/extra-addons
-      - ./etc:/etc/odoo
-      - ./web-data:/var/lib/odoo  
-    restart: always
+      - 'postgresql_data:/bitnami/postgresql'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRESQL_USERNAME=bn_odoo
+      - POSTGRESQL_DATABASE=bitnami_odoo
+  odoo:
+    image: docker.io/bitnami/odoo:18
+    ports:
+      - '8069:8069'
+    volumes:
+      - 'odoo_data:/bitnami/odoo'
+    depends_on:
+      - postgresql
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - ODOO_DATABASE_HOST=postgresql
+      - ODOO_DATABASE_PORT_NUMBER=5432
+      - ODOO_DATABASE_USER=bn_odoo
+      - ODOO_DATABASE_NAME=bitnami_odoo
+volumes:
+  postgresql_data:
+    driver: local
+  odoo_data:
+    driver: local

@@ -72,5 +72,21 @@
   "odoo_volume_/etc/odoo_action": "emptyDir",
   "odoo_volume_/etc/odoo_location": "app_data",
   "odoo_volume_/var/lib/odoo_action": "emptyDir",
-  "odoo_volume_/var/lib/odoo_location": "app_data"
+  "odoo_volume_/var/lib/odoo_location": "app_data",
+  "image_docker.io_bitnami_postgresql_latest": {
+    "originalImage": "docker.io/bitnami/postgresql:latest",
+    "pushTarget": "lazycat",
+    "newImageName": "registry.lazycat.cloud/mxuexxmy/bitnami/postgresql:3a05612e696be9d9",
+    "timestamp": "2025-01-14T05:25:11.759Z"
+  },
+  "postgresql_volume_postgresql_data_/bitnami/postgresql_action": "emptyDir",
+  "postgresql_volume_/bitnami/postgresql_location": "app_data",
+  "image_docker.io_bitnami_odoo_18": {
+    "originalImage": "docker.io/bitnami/odoo:18",
+    "pushTarget": "lazycat",
+    "newImageName": "registry.lazycat.cloud/mxuexxmy/bitnami/odoo:a23be3bbb0cd14b9",
+    "timestamp": "2025-01-14T05:27:30.844Z"
+  },
+  "odoo_volume_odoo_data_/bitnami/odoo_action": "emptyDir",
+  "odoo_volume_/bitnami/odoo_location": "app_data"
 }

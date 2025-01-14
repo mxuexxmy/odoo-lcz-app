@@ -15,23 +15,23 @@ application:
   routes:
     - /=http://odoo.cloud.lazycat.app.odoo.lzcapp:8069/
 services:
-  postgres-db:
-    image: registry.lazycat.cloud/mxuexxmy/library/postgres:8cce992e23d242ff
+  postgresql:
+    image: registry.lazycat.cloud/mxuexxmy/bitnami/postgresql:3a05612e696be9d9
     environment:
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=odoo18@2024
-      - POSTGRES_DB=postgres
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRESQL_USERNAME=bn_odoo
+      - POSTGRESQL_DATABASE=bitnami_odoo
     binds:
-      - /lzcapp/var/data:/var/lib/postgresql/data
+      - /lzcapp/var/postgresql:/bitnami/postgresql
   odoo:
-    image: registry.lazycat.cloud/mxuexxmy/library/odoo:4322dc0dd371c438
+    image: registry.lazycat.cloud/mxuexxmy/bitnami/odoo:a23be3bbb0cd14b9
     environment:
-      - HOST=db
-      - USER=odoo
-      - PASSWORD=odoo18@2024
+      - ALLOW_EMPTY_PASSWORD=yes
+      - ODOO_DATABASE_HOST=postgresql
+      - ODOO_DATABASE_PORT_NUMBER=5432
+      - ODOO_DATABASE_USER=bn_odoo
+      - ODOO_DATABASE_NAME=bitnami_odoo
     depends_on:
-      - postgres-db
+      - postgresql
     binds:
-      - /lzcapp/var/extra-addons:/mnt/extra-addons
-      - /lzcapp/var/odoo:/etc/odoo
-      - /lzcapp/var/odoo:/var/lib/odoo
+      - /lzcapp/var/odoo:/bitnami/odoo
