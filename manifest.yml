@@ -1,7 +1,7 @@
 lzc-sdk-version: "0.1"
 name: Odoo
 package: cloud.lazycat.app.odoo
-version: 0.0.1
+version: 0.0.2
 description: 一站式全业务链管理平台
 homepage: ""
 author: odoo
@@ -15,23 +15,22 @@ application:
   routes:
     - /=http://odoo.cloud.lazycat.app.odoo.lzcapp:8069/
 services:
-  postgresql:
-    image: registry.lazycat.cloud/mxuexxmy/bitnami/postgresql:3a05612e696be9d9
+  postgres:
+    image: registry.lazycat.cloud/mxuexxmy/library/postgres:8967b07c4959a05e
     environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - POSTGRESQL_USERNAME=bn_odoo
-      - POSTGRESQL_DATABASE=bitnami_odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo18@2024
+      - POSTGRES_DB=postgres
     binds:
-      - /lzcapp/var/postgresql:/bitnami/postgresql
+      - /lzcapp/var/data:/var/lib/postgresql/data
   odoo:
-    image: registry.lazycat.cloud/mxuexxmy/bitnami/odoo:a23be3bbb0cd14b9
+    image: registry.lazycat.cloud/mxuexxmy/library/odoo:a498cae86713a721
     environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - ODOO_DATABASE_HOST=postgresql
-      - ODOO_DATABASE_PORT_NUMBER=5432
-      - ODOO_DATABASE_USER=bn_odoo
-      - ODOO_DATABASE_NAME=bitnami_odoo
+      - HOST=postgres
+      - USER=odoo
+      - PASSWORD=odoo18@2024
     depends_on:
-      - postgresql
+      - postgres
     binds:
-      - /lzcapp/var/odoo:/bitnami/odoo
+      - /lzcapp/var/extra-addons:/mnt/extra-addons
+      - /lzcapp/var/odoo:/etc/odoo

@@ -6,7 +6,7 @@
   "author": "odoo",
   "app_features": [],
   "subdomain": "odoo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "iconPath": "lzc-icon.png",
   "composePath": "docker-compose.yml",
   "unsupported_platforms": [],
@@ -88,5 +88,13 @@
     "timestamp": "2025-01-14T05:27:30.844Z"
   },
   "odoo_volume_odoo_data_/bitnami/odoo_action": "emptyDir",
-  "odoo_volume_/bitnami/odoo_location": "app_data"
+  "odoo_volume_/bitnami/odoo_location": "app_data",
+  "image_postgres_14": {
+    "originalImage": "postgres:14",
+    "pushTarget": "lazycat",
+    "newImageName": "registry.lazycat.cloud/mxuexxmy/library/postgres:8967b07c4959a05e",
+    "timestamp": "2025-01-14T16:41:56.670Z"
+  },
+  "postgres_volume_/var/lib/postgresql/data_action": "emptyDir",
+  "postgres_volume_/var/lib/postgresql/data_location": "app_data"
 }
