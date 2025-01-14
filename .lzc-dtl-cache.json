@@ -23,6 +23,12 @@
       "type": "http",
       "path": "/",
       "targetPath": "/"
+    },
+    "odoo_8069_8069": {
+      "use": true,
+      "type": "http",
+      "path": "/",
+      "targetPath": "/"
     }
   },
   "image_postgres_17": {
@@ -37,7 +43,9 @@
   },
   "image_postgres_15": {
     "originalImage": "postgres:15",
-    "pushTarget": "lazycat"
+    "pushTarget": "lazycat",
+    "newImageName": "registry.lazycat.cloud/mxuexxmy/library/postgres:8cce992e23d242ff",
+    "timestamp": "2025-01-14T04:58:18.636Z"
   },
   "postgres-db_volume_/var/lib/postgresql/data_action": "emptyDir",
   "postgres-db_volume_/var/lib/postgresql/data_location": "app_data",
@@ -50,5 +58,19 @@
   "odoo18_volume_/mnt/extra-addons_action": "emptyDir",
   "odoo18_volume_/mnt/extra-addons_location": "app_data",
   "odoo18_volume_/etc/odoo_action": "emptyDir",
-  "odoo18_volume_/etc/odoo_location": "app_data"
+  "odoo18_volume_/etc/odoo_location": "app_data",
+  "image_odoo_17": {
+    "originalImage": "odoo:17",
+    "pushTarget": "lazycat",
+    "newImageName": "registry.lazycat.cloud/mxuexxmy/library/odoo:4322dc0dd371c438",
+    "timestamp": "2025-01-14T05:00:04.562Z"
+  },
+  "odoo18_volume_/var/lib/odoo_action": "emptyDir",
+  "odoo18_volume_/var/lib/odoo_location": "app_data",
+  "odoo_volume_/mnt/extra-addons_action": "emptyDir",
+  "odoo_volume_/mnt/extra-addons_location": "app_data",
+  "odoo_volume_/etc/odoo_action": "emptyDir",
+  "odoo_volume_/etc/odoo_location": "app_data",
+  "odoo_volume_/var/lib/odoo_action": "emptyDir",
+  "odoo_volume_/var/lib/odoo_location": "app_data"
 }

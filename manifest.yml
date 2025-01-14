@@ -13,25 +13,25 @@ application:
   kvm_accel: false
   usb_accel: false
   routes:
-    - /=http://odoo18.cloud.lazycat.app.odoo.lzcapp:8069/
+    - /=http://odoo.cloud.lazycat.app.odoo.lzcapp:8069/
 services:
   postgres-db:
-    image: registry.lazycat.cloud/mxuexxmy/library/postgres:7bf15a21a948d5f3
+    image: registry.lazycat.cloud/mxuexxmy/library/postgres:8cce992e23d242ff
     environment:
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo18@2024
       - POSTGRES_DB=postgres
     binds:
       - /lzcapp/var/data:/var/lib/postgresql/data
-  odoo18:
-    image: registry.lazycat.cloud/mxuexxmy/library/odoo:a498cae86713a721
+  odoo:
+    image: registry.lazycat.cloud/mxuexxmy/library/odoo:4322dc0dd371c438
     environment:
       - HOST=db
       - USER=odoo
       - PASSWORD=odoo18@2024
-    command: --
     depends_on:
       - postgres-db
     binds:
       - /lzcapp/var/extra-addons:/mnt/extra-addons
       - /lzcapp/var/odoo:/etc/odoo
+      - /lzcapp/var/odoo:/var/lib/odoo
